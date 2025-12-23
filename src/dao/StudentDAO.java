@@ -3,6 +3,9 @@ package dao;
 import model.Student;
 import util.DBConnection;
 import java.sql.*;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 
 public class StudentDAO {
 
@@ -174,6 +177,41 @@ public class StudentDAO {
         }
     }
 
+    public void exportStudentsToCSV() {
+        try {
+            Connection con = DBConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                    "SELECT * FROM students");
+            ResultSet rs = ps.executeQuery();
+
+            PrintWriter pw = new PrintWriter(new FileWriter("students.csv"));
+
+            // CSV Header
+            pw.println("ID,Name,Email,Course");
+
+            boolean found = false;
+            while (rs.next()) {
+                found = true;
+                pw.println(
+                        rs.getInt("id") + "," +
+                                rs.getString("name") + "," +
+                                rs.getString("email") + "," +
+                                rs.getString("course")
+                );
+            }
+
+            pw.close();
+
+            if (found) {
+                System.out.println("Students exported successfully to students.csv");
+            } else {
+                System.out.println("No students found to export.");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Failed to export students.");
+        }
+    }
 
 
 
