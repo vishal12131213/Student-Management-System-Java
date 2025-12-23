@@ -1,0 +1,17 @@
+# Sensitive files
+db.properties
+
+# Libraries
+*.jar
+lib/
+
+# IntelliJ
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+settings.json
+
+# Java
+*.class
