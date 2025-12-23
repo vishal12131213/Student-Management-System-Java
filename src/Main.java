@@ -19,6 +19,7 @@ public class Main {
             System.out.println("6. Search by Name");
             System.out.println("7. Search by Email");
             System.out.println("8. Count Total Students");
+            System.out.println("9. Search by Course");
             System.out.print("Enter your choice: ");
 
             int choice = sc.nextInt();
@@ -129,9 +130,20 @@ public class Main {
                     case 8:
                         dao.countStudents();
                         break;
+                    case 9:
+                        sc.nextLine();
+                        System.out.print("Enter course name to search: ");
+                        String courseSearch = sc.nextLine();
 
+                        if (courseSearch.trim().isEmpty()) {
+                            System.out.println("Course cannot be empty.");
+                            break;
+                        }
+
+                        dao.searchByCourse(courseSearch);
+                        break;
                     default:
-                        System.out.println("Invalid choice. Please try again.");
+                    System.out.println("Invalid choice. Please try again.");
                 }
 
             } catch (Exception e) {

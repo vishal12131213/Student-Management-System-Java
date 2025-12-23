@@ -144,6 +144,35 @@ public class StudentDAO {
             System.out.println("Unable to fetch student count.");
         }
     }
+    public void searchByCourse(String course) {
+        try {
+            Connection con = DBConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                    "SELECT * FROM students WHERE course LIKE ?");
+
+            ps.setString(1, "%" + course + "%");
+            ResultSet rs = ps.executeQuery();
+
+            boolean found = false;
+
+            while (rs.next()) {
+                found = true;
+                System.out.println(
+                        rs.getInt("id") + " | " +
+                                rs.getString("name") + " | " +
+                                rs.getString("email") + " | " +
+                                rs.getString("course")
+                );
+            }
+
+            if (!found) {
+                System.out.println("No students found for this course.");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Unable to search students by course.");
+        }
+    }
 
 
 
