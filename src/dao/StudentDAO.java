@@ -127,6 +127,24 @@ public class StudentDAO {
             System.out.println("Search failed.");
         }
     }
+    public void countStudents() {
+        try {
+            Connection con = DBConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                    "SELECT COUNT(*) FROM students");
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                System.out.println("Total number of students: " + count);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Unable to fetch student count.");
+        }
+    }
+
 
 
 

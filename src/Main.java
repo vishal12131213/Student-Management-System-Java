@@ -8,6 +8,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         StudentDAO dao = new StudentDAO();
 
+
         while (true) {   // 🔁 MENU LOOP
             System.out.println("\n====== Student Management System ======");
             System.out.println("1. Add Student");
@@ -17,6 +18,7 @@ public class Main {
             System.out.println("5. Exit");
             System.out.println("6. Search by Name");
             System.out.println("7. Search by Email");
+            System.out.println("8. Count Total Students");
             System.out.print("Enter your choice: ");
 
             int choice = sc.nextInt();
@@ -123,6 +125,9 @@ public class Main {
                         }
 
                         dao.searchByEmail(searchEmail);
+                        break;
+                    case 8:
+                        dao.countStudents();
                         break;
 
                     default:
